@@ -37,12 +37,22 @@ public class Bin15 {
     
     @Override
     public boolean equals(Object o) {
-        return false; // YOUR CODE HERE
+        if (o != null && o instanceof Bin15) {
+        	Bin15 other = (Bin15) o;
+            return this.hashCode() == other.hashCode();
+        }
+        return false;
     }
     
     @Override
     public int hashCode() {
-        return -1; // YOUR CODE HERE
+    	int hash = 0;
+    	for(int i = 0; i < 15; i += 1){
+    		hash = hash << 1;
+    		if(myBinStr.charAt(i)== '1')
+    			hash += 1;
+    	}
+        return hash; // YOUR CODE HERE
     }
 
     /* DO THIS LAST, AFTER IMPLEMENTING EVERYTHING
@@ -57,11 +67,31 @@ public class Bin15 {
     
     public static void main(String[] args) {
         // Optional testing here. Potentially useless information:
-        int c = 0x9 - 1 - 0b01;
+        //int c = 0x9 - 1 - 0b01;
         // 0x9 means 9 in hexadecimal
         // 1 means 1 in decimal
         // 0b01 means 01 or 1 in binary
-        System.out.println("Note to self: Answer follow-up question!");
+    	Bin15 test1 = new Bin15("101100101001101");
+    	Bin15 test2 = new Bin15("111111111111111");
+    	Bin15 test3 = new Bin15("000000000000000");
+    	Bin15 test4 = new Bin15("101100101001101");
+    	Bin15 test5 = new Bin15("101010101010111");
+    	
+    	System.out.println(test1.hashCode());
+    	System.out.println(test2.hashCode());
+    	System.out.println(test3.hashCode());
+    	System.out.println(test4.hashCode());
+    	System.out.println(test5.hashCode());
+    	
+    	System.out.println(test1.equals(test1));
+    	System.out.println(test1.equals(test4));
+    	System.out.println(test1.equals(test2));
+    	System.out.println(test1.equals(test3));
+    	System.out.println(test1.equals(test5));
+    	System.out.println(test2.equals(test3));
+    	System.out.println(test3.equals(test3));
+    	
+        //System.out.println("Note to self: Answer follow-up question!");
     }
 }
 
