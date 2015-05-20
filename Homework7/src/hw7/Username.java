@@ -29,6 +29,9 @@ public class Username {
 
     public Username(String reqName) {
         // YOUR CODE HERE
+    	if(reqName == null)
+    		throw new NullPointerException("Requested username is null!");
+    	
     	if(reqName.length() > 3 || reqName.length() < 2)
     		throw new IllegalArgumentException("Username must be between 2 and 3 characters long!");
     	
