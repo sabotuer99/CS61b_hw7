@@ -132,4 +132,18 @@ public class MyHashMapTests {
 		assertEquals(100, result1);
 		assertEquals(105, result2);
 	}
+	
+	//Interesting, but not a well formed unit test
+/*	@Test
+	public void ToString_RandomData_ReturnsMapStructuredString() {
+		//Arrange
+		MyHashMap<Integer, Integer> map = new MyHashMap<Integer, Integer>(1, 4.0f);
+		
+		for(int i = 0; i < 100; i += 1){
+			map.put((int)(Math.random() * 1000), i);
+			if(i % 20 == 0)
+				System.out.print(map.toString() + "\n");
+		}
+		
+	}*/
 }

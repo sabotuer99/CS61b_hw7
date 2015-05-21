@@ -46,7 +46,7 @@ public class MyHashMap<T1, T2> implements Map61B<T1, T2> {
 	@Override
 	public T2 get(T1 key) {		
 		//choose bin 
-		int index = getBucket(key);
+		int index = getBucket(key, table);
 		if(table[index] == null){	
 			return null;
 		} else {
@@ -77,12 +77,12 @@ public class MyHashMap<T1, T2> implements Map61B<T1, T2> {
 		Entry entry = new Entry(key, value);
 		
 		//choose bin 
-		int index = getBucket(key);
+		int index = getBucket(key, table);
 		
 		addEntryToBucket(table, entry, index);
 	}
 
-	private int getBucket(T1 key) {
+	private int getBucket(T1 key, Object[] table) {
 		int index = key.hashCode() % table.length;
 		return index;
 	}
@@ -124,7 +124,7 @@ public class MyHashMap<T1, T2> implements Map61B<T1, T2> {
 			if(o != null){
 				ArrayList<Entry> list = (ArrayList<Entry>)o;
 				for(Entry entry : list){
-					int index = getBucket(entry.key);
+					int index = getBucket(entry.key, newTable);
 					addEntryToBucket(newTable, entry, index);
 				}
 			}	
@@ -148,6 +148,17 @@ public class MyHashMap<T1, T2> implements Map61B<T1, T2> {
 	public Set<T1> keySet() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public String toString() {
+		String output = "";
+		for(int i = 0; i < table.length; i += 1){
+			@SuppressWarnings("unchecked")
+			String contents = table[i] == null ? "null" : ((ArrayList<Entry>)table[i]).toString();
+			output += "[" + i + "] = " + contents + "\n";
+		}
+		return output;
 	}
 	
 	private class Entry {
@@ -175,6 +186,11 @@ public class MyHashMap<T1, T2> implements Map61B<T1, T2> {
 	            return this.getKey() == other.getKey();
 	        }
 	        return false;
+	    }
+	    
+	    @Override
+	    public String toString() {
+	    	return "<" + key.toString() + ", " + value.toString() + ">";
 	    }
 	}
 
