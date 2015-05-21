@@ -67,7 +67,24 @@ public class Piece {
 
     @Override
     public int hashCode() {
-        return 5; // YOUR CODE HERE
+    	int sidebit = 0;
+    	if(side)
+    		sidebit = 1;
+    	
+    	int kingbit = 0;
+    	if(isKing)
+    		kingbit = 1;
+    	
+    	int xbits = x ^ (x >> 8);
+    	int ybits = y ^ (y >> 8);
+    	
+    	int hash = ((xbits << 9) >> 9) + (ybits << 7);
+    	hash <<= 1;
+    	hash += sidebit;
+    	hash <<= 1;
+    	hash += kingbit;
+    	
+        return hash; 
     }
 
     public static void main(String[] args) {
