@@ -58,5 +58,8 @@ public class Board {
 		hash += firebit;
 		
         return hash; // YOUR CODE HERE
+        
+        //I wonder if this would work just as well...
+        //return pieces.hashCode();
     }
 }
