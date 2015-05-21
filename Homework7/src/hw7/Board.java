@@ -61,10 +61,10 @@ public class Board {
 		hash <<= 1;
 		hash += firebit;
 		
-        //return hash; // YOUR CODE HERE
+        return hash; // YOUR CODE HERE
         
         //I wonder if this would work just as well...
 		//yep, this passes all unit tests... pete's sake...
-        return pieces.hashCode() + firebit;
+        //return pieces.hashCode() + firebit;
     }
 }
