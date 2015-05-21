@@ -9,8 +9,16 @@ public class MapRace {
     /* Tests the put action the specified number of times. */
     private static long timePuts61B(Map61B<Integer, Integer> map, 
                 int num_puts, int key_range, int val_range) {
-        // YOUR CODE HERE
-        return 0;
+		Stopwatch sw = new Stopwatch();
+		for(int i = 0; i < num_puts; i += 1){
+			try{
+			map.put((int)(Math.random() * key_range), (int)(Math.random() * val_range));
+			} catch (Exception ex){
+				//gulp
+			}
+		}
+		return (long)(sw.elapsedTime() * 1000);
+
     }
 
     /* Tests the get action the specified number of times. */
