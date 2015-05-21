@@ -1,6 +1,7 @@
 package hw7;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 public class MyHashMap<T1, T2> implements Map61B<T1, T2> {
@@ -134,20 +135,63 @@ public class MyHashMap<T1, T2> implements Map61B<T1, T2> {
 	
 	@Override
 	public T2 remove(T1 key) {
-		// TODO Auto-generated method stub
-		return null;
+		int index = getBucket(key, table);
+		if(table[index] == null){	
+			return null;
+		} else {
+			@SuppressWarnings("unchecked")
+			ArrayList<Entry> list = ((ArrayList<Entry>) table[index]);
+			int listIndex = list.indexOf(new Entry(key, null));
+			if(listIndex == -1)
+				return null; 
+			
+			//this is the only difference from "get"
+			Entry entry = list.remove(listIndex);
+			fillCount -= 1;
+			return entry.getValue();
+		}	
 	}
 
 	@Override
 	public T2 remove(T1 key, T2 value) {
-		// TODO Auto-generated method stub
-		return null;
+		int index = getBucket(key, table);
+		if(table[index] == null){	
+			return null;
+		} else {
+			@SuppressWarnings("unchecked")
+			ArrayList<Entry> list = ((ArrayList<Entry>) table[index]);
+			int listIndex = list.indexOf(new Entry(key, null));
+			if(listIndex == -1)
+				return null; 
+			
+			Entry entry = list.get(listIndex);
+			if(entry.value == value){
+				entry = list.remove(listIndex);
+				fillCount -= 1;
+				//if this is the last value, null the list
+				if(list.size() == 0)
+					table[index] = null;
+				
+				return entry.getValue();
+			}
+			
+			return null;
+		}	
 	}
 
 	@Override
 	public Set<T1> keySet() {
-		// TODO Auto-generated method stub
-		return null;
+		Set<T1> output = new HashSet<T1>();
+		for(int i = 0; i < table.length; i += 1){
+			if(table[i] != null){
+				@SuppressWarnings("unchecked")
+				ArrayList<Entry> list = ((ArrayList<Entry>)table[i]);
+				for(Entry entry : list){
+					output.add(entry.getKey());
+				}
+			}
+		}
+		return output.size() == 0 ? null : output;
 	}
 	
 	@Override

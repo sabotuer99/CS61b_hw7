@@ -2,6 +2,8 @@ package hw7;
 
 import static org.junit.Assert.*;
 
+import java.util.Set;
+
 import org.junit.Test;
 
 public class MyHashMapTests {
@@ -133,6 +135,125 @@ public class MyHashMapTests {
 		assertEquals(105, result2);
 	}
 	
+	@Test
+	public void RemoveK_KeyInMapWithOtherKeys_ReturnsValue() {
+		//Arrange
+		MyHashMap<Integer, Integer> map = new MyHashMap<Integer, Integer>(1, 1.0f);
+		map.put(1, 100);
+		map.put(2, 101);
+		map.put(3, 102);
+		map.put(4, 103);
+		map.put(5, 104);
+		map.put(6, 105);
+		
+		//Act
+		int result1 = map.remove(1);
+		int result2 = map.remove(6);
+		
+		//Assert
+		assertEquals(100, result1);
+		assertEquals(105, result2);
+	}
+	
+	@Test
+	public void RemoveK_KeyInMapWithOtherKeys_ReturnsCorrectSize() {
+		//Arrange
+		MyHashMap<Integer, Integer> map = new MyHashMap<Integer, Integer>(1, 1.0f);
+		map.put(1, 100);
+		map.put(2, 101);
+		map.put(3, 102);
+		map.put(4, 103);
+		map.put(5, 104);
+		map.put(6, 105);
+		
+		//Act
+		map.remove(1);
+		map.remove(6);
+		
+		//Assert
+		assertEquals(4, map.size());
+	}
+	
+	@Test
+	public void RemoveKV_KeyInMapWithOtherKeys_ReturnsValue() {
+		//Arrange
+		MyHashMap<Integer, Integer> map = new MyHashMap<Integer, Integer>(1, 1.0f);
+		map.put(1, 100);
+		map.put(2, 101);
+		map.put(3, 102);
+		map.put(4, 103);
+		map.put(5, 104);
+		map.put(6, 105);
+		
+		//Act
+		Integer result1 = map.remove(1, 100);
+		Integer result2 = map.remove(6, 105);
+		
+		//Assert
+		Integer expect1 = 100;
+		Integer expect2 = 105;
+		assertEquals(expect1, result1);
+		assertEquals(expect2, result2);
+	}
+	
+	@Test
+	public void RemoveKV_KeyInMapWithOtherKeys_ReturnsCorrectSize() {
+		//Arrange
+		MyHashMap<Integer, Integer> map = new MyHashMap<Integer, Integer>(1, 1.0f);
+		map.put(1, 100);
+		map.put(2, 101);
+		map.put(3, 102);
+		map.put(4, 103);
+		map.put(5, 104);
+		map.put(6, 105);
+		
+		//Act
+		map.remove(1, 100);
+		map.remove(6, 105);
+		
+		//Assert
+		assertEquals(4, map.size());
+	}
+	
+	@Test
+	public void RemoveKV_KeyInMapValueDiff_ReturnsNull() {
+		//Arrange
+		MyHashMap<Integer, Integer> map = new MyHashMap<Integer, Integer>(1, 1.0f);
+		map.put(1, 100);
+		map.put(2, 101);
+		map.put(3, 102);
+		map.put(4, 103);
+		map.put(5, 104);
+		map.put(6, 105);
+		
+		//Act
+		Integer result1 = map.remove(1, 100);
+		Integer result2 = map.remove(6, 999);
+		
+		//Assert
+		Integer expect1 = 100;
+		assertEquals(expect1, result1);
+		assertEquals(5, map.size());
+		assertNull(result2);	
+	}
+	
+	@Test
+	public void KeySet_KeysInMap_ReturnsKeys() {
+		//Arrange
+		MyHashMap<Integer, Integer> map = new MyHashMap<Integer, Integer>(1, 1.0f);
+		map.put(1, 100);
+		map.put(2, 101);
+		map.put(3, 102);
+		map.put(4, 103);
+		map.put(5, 104);
+		map.put(6, 105);
+		
+		//Act
+		Set<Integer> result = map.keySet();
+		
+		//Assert
+		assertEquals("[1, 2, 3, 4, 5, 6]", result.toString());	
+	}
 	//Interesting, but not a well formed unit test
 /*	@Test
 	public void ToString_RandomData_ReturnsMapStructuredString() {
