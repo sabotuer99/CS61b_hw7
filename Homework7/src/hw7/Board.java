@@ -25,6 +25,10 @@ public class Board {
 	public boolean equals(Object o) {
         return true; // YOUR CODE HERE
 	}
+	
+	public void switchTurns(){
+		isFireTurn = !isFireTurn;
+	}
 
     @Override
     public int hashCode() {
@@ -57,9 +61,10 @@ public class Board {
 		hash <<= 1;
 		hash += firebit;
 		
-        return hash; // YOUR CODE HERE
+        //return hash; // YOUR CODE HERE
         
         //I wonder if this would work just as well...
-        //return pieces.hashCode();
+		//yep, this passes all unit tests... pete's sake...
+        return pieces.hashCode() + firebit;
     }
 }

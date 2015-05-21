@@ -107,6 +107,45 @@ public class CheckersTests {
 	}
 	
 	@Test
+	public void BoardHash_SamePieceDifferentTurn_DiffHashcodes() {
+		//Arrange
+		Piece[][] p1 = new Piece[8][8];	
+		p1[0][0] = new Piece(false, 0, 0, null, false);
+		Board test1 = new Board(p1);
+		
+		Piece[][] p2 = new Piece[8][8];	
+		p2[0][0] = new Piece(false, 0, 1, null, false);
+		Board test2 = new Board(p2);
+		test2.switchTurns();
+		
+		//Act
+		int result1 = test1.hashCode();
+		int result2 = test2.hashCode();
+		
+		//Assert
+		assertNotEquals(result1, result2);
+	}
+	
+	@Test
+	public void BoardHash_SamePieceOneKing_DiffHashcodes() {
+		//Arrange
+		Piece[][] p1 = new Piece[8][8];	
+		p1[0][0] = new Piece(false, 0, 0, null, false);
+		Board test1 = new Board(p1);
+		
+		Piece[][] p2 = new Piece[8][8];	
+		p2[0][0] = new Piece(false, 0, 1, null, true);
+		Board test2 = new Board(p2);
+		
+		//Act
+		int result1 = test1.hashCode();
+		int result2 = test2.hashCode();
+		
+		//Assert
+		assertNotEquals(result1, result2);
+	}
+	
+	@Test
 	public void BoardHash_10000Boards_LessThan10PercentCollisions() {
 		//Arrange
 		ArrayList<Integer> hashes = new ArrayList<Integer>();
