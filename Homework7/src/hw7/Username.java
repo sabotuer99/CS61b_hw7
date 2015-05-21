@@ -65,7 +65,7 @@ public class Username {
     	int hashInt = 0;
     	
     	for(int i = 0; i <= 2; i += 1){
-    		hashInt += (hashString.charAt(i) - 48) * (Math.pow(100, i));
+    		hashInt += (hashString.charAt(i) - 40) * (Math.pow(100, i));
     	}
     	 
         return hashInt;

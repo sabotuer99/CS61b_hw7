@@ -178,6 +178,41 @@ public class UsernameBankTests {
 		assertTrue(regexMatch("[0-9A-Za-z]{2,3}", result));
 	}
 	
+	@Test
+	public void SuggestUsername_MostlyFullBank_ReturnsValidUsername() {
+		//Arrange
+		UsernameBank sut = new UsernameBank();
+		
+		for(int i = 0; i < 32; i += 1){                // this triple for loop populates
+			for(int j = 0; j < 36; j += 1){            // the userbank with all the two char usernames
+				for(int k = 0; k < 36; k += 1){        // and all the three digit usernames with a first 
+		    		String un = new StringBuilder()    // char from A to V (so only W.. X.. Y.. and Z..
+						.append(domainChar(i))         // usernames would be valid suggestions
+						.append(domainChar(j))
+						.append(domainChar(k))
+						.toString();
+		    		
+					sut.generateUsername(un, un + "@test.com");
+					
+					if(i == 0){
+						String sh = new StringBuilder()
+						.append(domainChar(j))
+						.append(domainChar(k))
+						.toString();
+			    		sut.generateUsername(sh, sh + "@test.com");
+					}
+				}
+			}
+		}
+				
+		//Act
+		String result = sut.suggestUsername();
+		System.out.println(result);
+		
+		//Assert
+		assertTrue(regexMatch("[W-Zw-z][0-9A-Za-z]{2}", result));
+	}
+	
     private boolean regexMatch(String pattern, String value){
     	//Pattern p = Pattern.compile("[0-9A-Za-z]{2,3}");
     	//Matcher m = p.matcher(reqName);
@@ -185,5 +220,19 @@ public class UsernameBankTests {
     	Matcher m = p.matcher(value);
     	return m.matches();
     }
+    
+	private char domainChar(int index){
+		//int is between 0 and 61
+		//values between 0 and 9 return 0 - 9
+		//values between 10 and 35
+		//values between 36 and 61
+		if(index < 10){
+			return (char)(index + 48);
+		} else if (index < 36) {
+			return (char)((index - 10) + 65);
+		} else {
+			return (char)((index - 36) + 97);
+		}
+	}
 	
 }

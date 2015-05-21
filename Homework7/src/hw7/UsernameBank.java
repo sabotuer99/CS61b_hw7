@@ -24,6 +24,7 @@ public class UsernameBank {
         if(username == null || email == null)
         	throw new NullPointerException();
         
+        //this will throw IllegalArgumentException if username is invalid
         Username uname = new Username(username);
         
         if(emails.get(uname) != null){
@@ -86,8 +87,10 @@ public class UsernameBank {
         // YOUR CODE HERE
     	for(int i = 0; i < 10000; i += 1){
 	    	Username attempt = new Username();   	
-	    	if(emails.get(attempt) == null)
+	    	if(emails.get(attempt) == null){
+	    		System.out.println("Suggestion attempts: " + (i+1));
 	    		return attempt.getUsername();
+	    	}
     	}
     		return null;
     }
