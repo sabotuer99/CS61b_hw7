@@ -65,12 +65,17 @@ public class Username {
     	int hashInt = 0;
     	
     	for(int i = 0; i <= 2; i += 1){
-    		hashInt += (hashString.charAt(i) - 48) * (Math.pow(100, i));
+    		hashInt += (hashString.charAt(i) - 40) * (Math.pow(100, i));
     	}
     	 
         return hashInt;
     }
 
+    @Override
+    public String toString() {
+    	return username;
+    }
+    
     public static void main(String[] args) {
         // You can put some simple testing here.
     }
@@ -81,7 +86,7 @@ public class Username {
 	
 	private char randomChar() {
 		double select = Math.random();
-		char rand;
+/*		char rand;
 		double charCount = 57 - 48 + 90 - 65 + 122 - 97;
 		if(select < (57.0 - 48.0)/charCount){
 	    	rand = (char) (Math.floor(Math.random() * (57 - 48 + 1)) + 48);
@@ -89,8 +94,23 @@ public class Username {
 	    	rand = (char) (Math.floor(Math.random() * (90 - 65 + 1)) + 65);		
 		} else {
 	    	rand = (char) (Math.floor(Math.random() * (122 - 97 + 1)) + 97);
-		}
+		}*/
+		int randIndex = (int)(Math.random() * 62);
 		
-		return rand;
+		return domainChar(randIndex);
+	}
+	
+	private char domainChar(int index){
+		//int is between 0 and 61
+		//values between 0 and 9 return 0 - 9
+		//values between 10 and 35
+		//values between 36 and 61
+		if(index < 10){
+			return (char)(index + 48);
+		} else if (index < 36) {
+			return (char)((index - 10) + 65);
+		} else {
+			return (char)((index - 36) + 97);
+		}
 	}
 }

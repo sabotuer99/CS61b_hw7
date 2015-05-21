@@ -56,7 +56,7 @@ public class UsernameTests {
 	
 	//slow test and I question it's reliability, though it proved useful during
 	//development
-	/*@Test
+/*	@Test
 	public void Username_DefaultCtor_ProducesConsistentResults() {
 		String output = "";
 		
@@ -91,7 +91,7 @@ public class UsernameTests {
 		
 		int averageCount = totalCount / charSelection;
 		
-		System.out.println(averageCount);
+		//System.out.println(averageCount);
 		//make sure every individual count is no more than 15% off of average
 		for(Integer count : counts){
 			assertTrue(count > averageCount * 0.85);
