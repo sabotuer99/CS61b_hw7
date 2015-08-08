@@ -161,7 +161,7 @@ public class CheckersTests {
 			else
 				hashes.add(testHash);
 		}
-		//System.out.println(collisions);
+		System.out.println(collisions);
 		
 		//Assert
 		assertTrue(collisions < 1000);

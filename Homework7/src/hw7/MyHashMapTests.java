@@ -255,7 +255,7 @@ public class MyHashMapTests {
 		assertEquals("[1, 2, 3, 4, 5, 6]", result.toString());	
 	}
 	//Interesting, but not a well formed unit test
-/*	@Test
+	@Test
 	public void ToString_RandomData_ReturnsMapStructuredString() {
 		//Arrange
 		MyHashMap<Integer, Integer> map = new MyHashMap<Integer, Integer>(1, 4.0f);
@@ -266,5 +266,5 @@ public class MyHashMapTests {
 				System.out.print(map.toString() + "\n");
 		}
 		
-	}*/
+	}
 }
